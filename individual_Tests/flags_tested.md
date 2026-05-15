@@ -1,0 +1,9 @@
+- **O_RDONLY**: 0x0
+- **O_WRONLY**: 0x1
+- **O_RDWR**: 0x2
+- **O_CREAT**: 0x40
+- **O_EXCL**: 0x80
+- **O_TRUNC**: 0x200
+- **O_APPEND**: 0x400
+- **O_NONBLOCK**: 0x800
+- **O_CLOEXEC**: 0x80000
