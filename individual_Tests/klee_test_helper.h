@@ -517,6 +517,43 @@ static void assert_seek_and_read(int fd, off_t offset, char expected_byte) {
            klee_get_value_i32(offset), expected_byte);
 }
 
+static void assert_fd_equals(int fd1, int fd2) {
+    int c_fd1 = klee_get_value_i32(fd1);
+    int c_fd2 = klee_get_value_i32(fd2);
+ 
+    if (c_fd1 != c_fd2) {
+        printf("  [debug] fd1=%d, fd2=%d - expected same\n", c_fd1, c_fd2);
+        klee_report_error(__FILE__, __LINE__,
+            "fd numbers do not match", "test_fail");
+    }
+    printf("[PASS] fd1=%d == fd2=%d\n", c_fd1, c_fd2);
+}
+
+static void assert_close_succeeds(int fd) {
+    int ret = close(fd);
+    int c_ret = klee_get_value_i32(ret);
+ 
+    if (c_ret != 0) {
+        printf("  [debug] close(%d) returned %d, errno=%d\n",
+               fd, c_ret, klee_get_value_i32(errno));
+        klee_report_error(__FILE__, __LINE__,
+            "expected close() to succeed but it failed", "test_fail");
+    }
+    printf("[PASS] close(%d) succeeded\n", fd);
+}
+ 
+static void assert_close_fails(int fd) {
+    int ret = close(fd);
+    int c_ret = klee_get_value_i32(ret);
+    int c_errno = klee_get_value_i32(errno);
+ 
+    if (c_ret != -1) {
+        printf("  [debug] close(%d) returned %d, expected -1\n", fd, c_ret);
+        klee_report_error(__FILE__, __LINE__,
+            "expected close() to fail but it succeeded", "test_fail");
+    }
+    printf("[PASS] close(%d) failed as expected - errno=%d\n", fd, c_errno);
+}
 
 /* ══════════════════════════════════════════════════════════════════════
  **** CLEANUP
