@@ -13,6 +13,12 @@
 #define MAX_FDS       29
 #define MAX_SYM_FILES 26
 
+//chmod
+#define FTYPE_REG 0
+#define FTYPE_CHR 1
+#define FTYPE_DIR 2
+
+
 /*
 KLEE has a max limit of 29 fd's: 32-3 = 29
 How files are created: https://github.com/klee/klee/blob/master/runtime/POSIX/fd_init.c
@@ -83,8 +89,74 @@ PAST OFFSET:
     f->off < dfile->size?             10 < 10?   NO — we're at/past the end
     actual_count stays 0                          nothing written
 
+fstat(fd, &sb)                          // stat an open fd
+fstatat(dirfd, "path", &sb, flags)      // stat relative to a directory fd
+stat("path", &sb)                       // stat by path (classic)
 
-    */
+chmod adds a lot of extra paths since it calls:
+KLEE: WARNING ONCE: calling external: geteuid() at klee_src/runtime/POSIX/fd.c:653
+KLEE: WARNING ONCE: calling external: getgid() at klee_src/runtime/POSIX/fd.c:654
+
+KLEE's chmod checks "does this user own the file?" and forks:
+Path 1: euid matches st_uid = chmod allowed = [PASS]
+Path 2: gid matches st_gid  = chmod allowed = [PASS]
+Path 3: neither matches     = chmod denied  = errno=1 (EPERM) → partial path
+Path 4: provably false assume from B-Z       = partial path??
+
+chmod concretizes st_mode (eliminates permission forking on open) but cannot concretize st_uid/st_gid (ownership still forks on chmod). 
+Minimum achievable: 2 completed paths.
+
+Open() always changes the mode without the O_CREAT flag.
+ f->dfile->stat->st_mode = ((f->dfile->stat->st_mode & ~0777) |
+				 (mode & ~__exe_env.umask));
+
+
+For somer reason when using RD_ONLY (0) in open this check should fail but doesnt (test 10):
+
+if (!has_permission(flags, df->stat)) {
+	errno = EACCES;
+	return -1;
+    }
+
+chmod(fname, 0222);                  // file permissions = -w--w--w-
+open(fname, O_RDONLY);               // try to read a write-only file
+if (!has_permission(flags, df->stat))    // flags = O_RDONLY = 0
+
+static int has_permission(int flags, struct stat64 *s) {
+    mode_t mode = s->st_mode;        // 0222 = -w--w--w-
+
+    int read_request = ((flags & O_RDONLY) | (flags & O_RDWR)) ? 1 : 0;
+
+O_RDONLY = 0x0
+O_WRONLY = 0x1
+O_RDWR   = 0x2
+
+flags = O_RDONLY = 0x0
+
+flags & O_RDONLY  =  0x0 & 0x0  =  0x0
+flags & O_RDWR   =  0x0 & 0x2  =  0x0
+
+(0x0 | 0x0) = 0x0
+
+0x0 ? 1 : 0  →  read_request = 0  // bug since we are requesting a read
+
+if ((read_request  & !((mode & S_IRUSR) | (mode & S_IRGRP) | (mode & S_IROTH))) |
+        (write_request & !((mode & S_IWUSR) | (mode & S_IWGRP) | (mode & S_IWOTH))))
+        return 0;    // deny access
+
+The above will always be 0 since read_request is 0.
+
+We return a 1 which is that we have permissions when we don't since we are writing to 0222 which is -w--w--w- and we request a read.
+
+Quick fix:
+int accmode = flags & O_ACCMODE;
+int read_request  = !(accmode & O_WRONLY);   // bit 0 clear = read needed
+int write_request = accmode ? 1 : 0;         // non-zero = write needed
+
+O_RDONLY (0):  read = !(0 & 1) = !0 = 1     write = 0 ? 1:0 = 0 
+O_WRONLY (1):  read = !(1 & 1) = !1 = 0     write = 1 ? 1:0 = 1 
+O_RDWR   (2):  read = !(2 & 1) = !0 = 1     write = 2 ? 1:0 = 1 
+*/
 
 static char fname[2];
 static int  flags;
@@ -157,9 +229,72 @@ static void assume_flags(int val) {
 
 //if we want 1 completed path only and 0 no complete we use this to change the file st_mode 
 //chmod(fname, 0666);  https://github.com/klee/klee/blob/master/runtime/POSIX/fd.c:619
-static void set_file_permissions(mode_t mode) {
-    chmod(fname, mode);
+//static void set_file_permissions(mode_t mode) {
+//    chmod(fname, mode);
+//}
+
+static void assert_chmod_succeeds(mode_t mode) {
+    int ret = chmod(fname, mode);
+    int c_ret = klee_get_value_i32(ret);
+ 
+    if (c_ret != 0) {
+        printf("  [debug] chmod(0%o) returned %d, errno=%d\n",
+               mode, c_ret, klee_get_value_i32(errno));
+        klee_report_error(__FILE__, __LINE__,
+            "expected chmod() to succeed but it failed", "test_fail");
+    }
+    printf("[PASS] chmod(0%o) succeeded\n", mode);
 }
+
+static void assert_chmod_fails(mode_t mode) {
+    int ret = chmod(fname, mode);
+    int c_ret = klee_get_value_i32(ret);
+ 
+    if (c_ret != -1) {
+        printf("  [debug] chmod(0%o) returned %d, expected -1\n", mode, c_ret);
+        klee_report_error(__FILE__, __LINE__,
+            "expected chmod() to fail but it succeeded", "test_fail");
+    }
+    printf("[PASS] chmod(0%o) failed as expected - errno=%d\n",
+           mode, klee_get_value_i32(errno));
+}
+
+static void assert_perms(mode_t expected) {
+    struct stat sb;
+    stat(fname, &sb);
+    int perms = sb.st_mode & 0777;
+    int c_perms = klee_get_value_i32(perms);
+ 
+    if (c_perms != (int)(expected & 0777)) {
+        printf("  [debug] expected perms 0%o, got 0%o\n", expected & 0777, c_perms);
+        klee_report_error(__FILE__, __LINE__,
+            "file permissions do not match expected", "test_fail");
+    }
+    printf("[PASS] perms = 0%o\n", c_perms);
+}
+
+static void assert_is_filetype(int type) {
+    struct stat sb;
+    stat(fname, &sb);
+    int c_mode = klee_get_value_i32(sb.st_mode);
+    int ok = 0;
+    const char *name = "???";
+ 
+    switch (type) {
+        case FTYPE_REG: ok = S_ISREG(c_mode); name = "S_ISREG"; break;
+        case FTYPE_CHR: ok = S_ISCHR(c_mode); name = "S_ISCHR"; break;
+        case FTYPE_DIR: ok = S_ISDIR(c_mode); name = "S_ISDIR"; break;
+    }
+ 
+    if (!ok) {
+        printf("  [debug] st_mode=0%o, %s=false\n", c_mode, name);
+        klee_report_error(__FILE__, __LINE__,
+            "file type does not match expected", "test_fail");
+    }
+    printf("[PASS] %s(st_mode) = true\n", name);
+}
+
+
 
 /* ══════════════════════════════════════════════════════════════════════
  **** DEBUG OUTPUT
