@@ -1,13 +1,6 @@
 # ═══════════════════════════════════════════════════════════════
-# KLEE open() Test Suite — Makefile
-#
-# PASS/FAIL detection:
-#   FAIL if: completed paths = 0 (nothing made it through)
-#   PASS if: completed paths > 0 AND [PASS] in output
-#
-#   This correctly handles KLEE exploring permission-denied
-#   paths that hit klee_report_error — those are partial paths,
-#   not completed ones.
+# open() Makefile
+# Uses --sym-files 1 10 (1 file, 1 byte)
 # ═══════════════════════════════════════════════════════════════
 
 CC       = clang

@@ -1,5 +1,5 @@
 # ═══════════════════════════════════════════════════════════════
-# read() Makefile
+# dup/dup2() Makefile
 # Uses --sym-files 1 10 (1 file, 10 bytes)
 # ═══════════════════════════════════════════════════════════════
 
@@ -12,7 +12,8 @@ SYMFILES = --sym-files 1 10
 HEADER   = ../klee_test_helper.h
 
 TESTS = test_01 test_02 test_03 test_04 test_05 test_06 \
-        test_07 test_08 test_09 test_10 test_11 test_12
+        test_07 test_08 test_09 test_10 test_11  \
+        test_13 test_14
 
 BCFILES = $(addsuffix .bc, $(TESTS))
 
@@ -41,7 +42,7 @@ compile: $(BCFILES)
 run: compile
 	@echo ""
 	@echo "$(CYAN)═══════════════════════════════════════════════════════════$(RESET)"
-	@echo "$(WHITE)  KLEE read() Test Suite — $(words $(TESTS)) tests$(RESET)"
+	@echo "$(WHITE)  KLEE dup/dup2 Test Suite — $(words $(TESTS)) tests$(RESET)"
 	@echo "$(CYAN)═══════════════════════════════════════════════════════════$(RESET)"
 	@passed=0; failed=0; total=0; failed_list=""; \
 	for t in $(TESTS); do \

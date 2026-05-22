@@ -1,12 +1,27 @@
 # ═══════════════════════════════════════════════════════════════
-# KLEE Global Test Suite — Makefile
+# KLEE Global Makefile
 #
-# Directory structure:
-#   ./klee_test_helper.h
-#   ./Makefile              <- this file
-#   ./open/     20 tests    ./write/   13 tests
-#   ./read/     12 tests    ./lseek/   15 tests
-#   ./chmod/    16 tests
+#
+# Usage:
+#   make run_all               run all 100 tests
+#   make run_open              run all open() tests
+#   make run_open_01           run open/test_01 only
+#   make run_write             run all write() tests
+#   make run_write_05          run write/test_05 only
+#   make run_read              run all read() tests
+#   make run_read_08           run read/test_08 only
+#   make run_lseek             run all lseek() tests
+#   make run_lseek_07          run lseek/test_07 only
+#   make run_chmod             run all chmod() tests
+#   make run_chmod_12          run chmod/test_12 only
+#   make run_close             run all close() tests
+#   make run_close_05          run close/test_05 only
+#   make run_dup               run all dup/dup2 tests
+#   make run_dup_11            run dup/test_11 only
+#   make compile_all           compile everything
+#   make compile_open          compile open/ only
+#   make clean                 nuke everything
+#   make clean_open            clean open/ only
 # ═══════════════════════════════════════════════════════════════
 
 RED      = \033[1;31m
@@ -18,7 +33,7 @@ DIM      = \033[2m
 RESET    = \033[0m
 BG_CYAN  = \033[46;1;37m
 
-SUITES = open write read lseek chmod
+SUITES = open write read lseek chmod close dup
 
 .PHONY: run_all compile_all clean $(addprefix run_,$(SUITES)) \
         $(addprefix compile_,$(SUITES)) $(addprefix clean_,$(SUITES))
@@ -60,6 +75,10 @@ run_lseek:
 	@$(MAKE) -C lseek run
 run_chmod:
 	@$(MAKE) -C chmod run
+run_close:
+	@$(MAKE) -C close run
+run_dup:
+	@$(MAKE) -C dup run
 
 compile_open:
 	@$(MAKE) -C open compile
@@ -71,6 +90,10 @@ compile_lseek:
 	@$(MAKE) -C lseek compile
 compile_chmod:
 	@$(MAKE) -C chmod compile
+compile_close:
+	@$(MAKE) -C close compile
+compile_dup:
+	@$(MAKE) -C dup compile
 
 clean_open:
 	@$(MAKE) -C open clean
@@ -82,6 +105,10 @@ clean_lseek:
 	@$(MAKE) -C lseek clean
 clean_chmod:
 	@$(MAKE) -C chmod clean
+clean_close:
+	@$(MAKE) -C close clean
+clean_dup:
+	@$(MAKE) -C dup clean
 
 run_open_%:
 	@$(MAKE) -C open compile
@@ -98,3 +125,9 @@ run_lseek_%:
 run_chmod_%:
 	@$(MAKE) -C chmod compile
 	@$(MAKE) -C chmod run_$*
+run_close_%:
+	@$(MAKE) -C close compile
+	@$(MAKE) -C close run_$*
+run_dup_%:
+	@$(MAKE) -C dup compile
+	@$(MAKE) -C dup run_$*

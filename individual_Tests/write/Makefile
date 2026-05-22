@@ -1,8 +1,6 @@
 # ═══════════════════════════════════════════════════════════════
-# KLEE write() Test Suite — Makefile
-#
-# Uses --sym-files 1 10 (1 file, 10 bytes) so write tests have
-# room to write without KLEE dropping bytes.
+# write() Makefile
+# Uses --sym-files 1 10 (1 file, 10 bytes) 
 # ═══════════════════════════════════════════════════════════════
 
 CC       = clang

@@ -155,7 +155,9 @@ int write_request = accmode ? 1 : 0;         // non-zero = write needed
 
 O_RDONLY (0):  read = !(0 & 1) = !0 = 1     write = 0 ? 1:0 = 0 
 O_WRONLY (1):  read = !(1 & 1) = !1 = 0     write = 1 ? 1:0 = 1 
-O_RDWR   (2):  read = !(2 & 1) = !0 = 1     write = 2 ? 1:0 = 1 
+O_RDWR   (2):  read = !(2 & 1) = !0 = 1     write = 2 ? 1:0 = 1
+
+
 */
 
 static char fname[2];
@@ -273,6 +275,7 @@ static void assert_perms(mode_t expected) {
     printf("[PASS] perms = 0%o\n", c_perms);
 }
 
+/*
 static void assert_is_filetype(int type) {
     struct stat sb;
     stat(fname, &sb);
@@ -293,7 +296,7 @@ static void assert_is_filetype(int type) {
     }
     printf("[PASS] %s(st_mode) = true\n", name);
 }
-
+*/
 
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -554,6 +557,73 @@ static void assert_close_fails(int fd) {
     }
     printf("[PASS] close(%d) failed as expected - errno=%d\n", fd, c_errno);
 }
+
+static int assert_dup_succeeds(int oldfd) {
+    int ret = dup(oldfd);
+    int c_ret = klee_get_value_i32(ret);
+    int c_old = klee_get_value_i32(oldfd);
+ 
+    if (c_ret < 0) {
+        printf("  [debug] dup(%d) returned %d, errno=%d\n",
+               c_old, c_ret, klee_get_value_i32(errno));
+        klee_report_error(__FILE__, __LINE__,
+            "expected dup() to succeed but it failed", "test_fail");
+    }
+    if (c_ret == c_old) {
+        printf("  [debug] dup(%d) returned same fd\n", c_old);
+        klee_report_error(__FILE__, __LINE__,
+            "dup() returned same fd as original", "test_fail");
+    }
+    printf("[PASS] dup(%d) returned %d\n", c_old, c_ret);
+    return ret;
+}
+ 
+static void assert_dup_fails(int oldfd) {
+    int ret = dup(oldfd);
+    int c_ret = klee_get_value_i32(ret);
+    int c_errno = klee_get_value_i32(errno);
+ 
+    if (c_ret != -1) {
+        printf("  [debug] dup(%d) returned %d, expected -1\n",
+               klee_get_value_i32(oldfd), c_ret);
+        klee_report_error(__FILE__, __LINE__,
+            "expected dup() to fail but it succeeded", "test_fail");
+    }
+    printf("[PASS] dup(%d) failed as expected - errno=%d\n",
+           klee_get_value_i32(oldfd), c_errno);
+}
+ 
+static int assert_dup2_succeeds(int oldfd, int newfd) {
+    int ret = dup2(oldfd, newfd);
+    int c_ret = klee_get_value_i32(ret);
+    int c_new = klee_get_value_i32(newfd);
+ 
+    if (c_ret != c_new) {
+        printf("  [debug] dup2(%d, %d) returned %d, expected %d\n",
+               klee_get_value_i32(oldfd), c_new, c_ret, c_new);
+        klee_report_error(__FILE__, __LINE__,
+            "expected dup2() to return newfd", "test_fail");
+    }
+    printf("[PASS] dup2(%d, %d) returned %d\n",
+           klee_get_value_i32(oldfd), c_new, c_ret);
+    return ret;
+}
+ 
+static void assert_dup2_fails(int oldfd, int newfd) {
+    int ret = dup2(oldfd, newfd);
+    int c_ret = klee_get_value_i32(ret);
+    int c_errno = klee_get_value_i32(errno);
+ 
+    if (c_ret != -1) {
+        printf("  [debug] dup2(%d, %d) returned %d, expected -1\n",
+               klee_get_value_i32(oldfd), klee_get_value_i32(newfd), c_ret);
+        klee_report_error(__FILE__, __LINE__,
+            "expected dup2() to fail but it succeeded", "test_fail");
+    }
+    printf("[PASS] dup2(%d, %d) failed as expected - errno=%d\n",
+           klee_get_value_i32(oldfd), klee_get_value_i32(newfd), c_errno);
+}
+
 
 /* ══════════════════════════════════════════════════════════════════════
  **** CLEANUP
