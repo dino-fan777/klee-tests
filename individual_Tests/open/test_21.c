@@ -1,8 +1,8 @@
 /*
- * test_02.c - O_WRONLY on existing file succeeds
+ * test_21.c - O_CLOEXEC | O_RDONLY on existing file succeeds
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone test_02.c
- * Run    : klee --posix-runtime --libc=uclibc test_02.bc --sym-files 1 1
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone test_21.c
+ * Run    : klee --posix-runtime --libc=uclibc test_21.bc --sym-files 1 1
  */
 #include "klee_test_helper.h"
 
@@ -11,7 +11,7 @@ int main(void) {
    declare_symbolic_flags();
 
    assume_file_exists();
-   assume_flags(O_WRONLY);
+   assume_flags(O_CLOEXEC | O_RDONLY);
 
    int fd = open(fname, flags);
 

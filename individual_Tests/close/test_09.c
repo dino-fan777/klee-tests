@@ -15,12 +15,12 @@ int main(void) {
    assume_file_exists();
    assume_flags(O_RDONLY);
 
-   int fd1 = open(fname, flags, 0644);
+   int fd1 = open(fname, flags, 6444);
    assert_open_succeeds(fd1);
 
    assert_close_succeeds(fd1);
 
-   int fd2 = open(fname, flags, 0644);
+   int fd2 = open(fname, flags, 6444);
    assert_open_succeeds(fd2);
 
    assert_fd_equals(fd1, fd2);

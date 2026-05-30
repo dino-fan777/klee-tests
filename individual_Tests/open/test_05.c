@@ -7,16 +7,16 @@
 #include "klee_test_helper.h"
 
 int main(void) {
-    declare_symbolic_fname();
-    declare_symbolic_flags();
+   declare_symbolic_fname();
+   declare_symbolic_flags();
 
-    assume_file_not_exists();
-    assume_flags(O_WRONLY);
+   assume_file_not_exists();
+   assume_flags(O_WRONLY);
 
-    int fd = open(fname, flags, 0644);
+   int fd = open(fname, flags);
 
-    assert_open_fails(fd);
+   assert_open_fails(fd);
 
-    cleanup_fd(fd);
-    return 0;
+   cleanup_fd(fd);
+   return 0;
 }
