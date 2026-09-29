@@ -1,0 +1,711 @@
+
+[1;36m═══════════════════════════════════════════════════════════[0m
+[1;37m  Compilation complete — 13 bitcode files ready[0m
+[1;36m═══════════════════════════════════════════════════════════[0m
+
+[1;36m═══════════════════════════════════════════════════════════[0m
+[1;37m  KLEE write() Test Suite — 13 tests[0m
+[1;36m═══════════════════════════════════════════════════════════[0m
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_01 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_01"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x79c597c00000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x79c317c00000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x78c317c00000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x78a317c00000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_01.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 132686970617856) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+KLEE: ERROR: klee_src/runtime/POSIX/file_api.c:199: ASSERTION FAIL: expr
+KLEE: NOTE: now ignoring this error at this location
+
+KLEE: done: total instructions = 16268
+KLEE: done: completed paths = 1
+KLEE: done: partially completed paths = 1
+KLEE: done: generated tests = 2
+
+  [42;1;37m PASS [0m test_01
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_02 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_02"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x7c069c800000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x7c041c800000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x7b041c800000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x7ae41c800000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_02.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 135165246439424) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+KLEE: ERROR: klee_src/runtime/POSIX/file_api.c:199: ASSERTION FAIL: expr
+KLEE: NOTE: now ignoring this error at this location
+
+KLEE: done: total instructions = 16268
+KLEE: done: completed paths = 1
+KLEE: done: partially completed paths = 1
+KLEE: done: generated tests = 2
+
+  [42;1;37m PASS [0m test_02
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_03 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_03"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x7a60c5c00000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x7a5e45c00000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x795e45c00000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x793e45c00000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_03.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 133353462300672) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+
+KLEE: done: total instructions = 16070
+KLEE: done: completed paths = 1
+KLEE: done: partially completed paths = 0
+KLEE: done: generated tests = 1
+
+  [42;1;37m PASS [0m test_03
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_04 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_04"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x775a01c00000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x775781c00000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x765781c00000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x763781c00000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_04.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 130025869279232) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+KLEE: ERROR: klee_src/runtime/POSIX/file_api.c:199: ASSERTION FAIL: expr
+KLEE: NOTE: now ignoring this error at this location
+
+KLEE: done: total instructions = 16157
+KLEE: done: completed paths = 1
+KLEE: done: partially completed paths = 1
+KLEE: done: generated tests = 2
+
+  [42;1;37m PASS [0m test_04
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_05 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_05"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x72eb94600000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x72e914600000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x71e914600000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x71c914600000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_05.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 125153541357568) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+KLEE: ERROR: klee_src/runtime/POSIX/file_api.c:199: ASSERTION FAIL: expr
+KLEE: NOTE: now ignoring this error at this location
+
+KLEE: done: total instructions = 16208
+KLEE: done: completed paths = 1
+KLEE: done: partially completed paths = 1
+KLEE: done: generated tests = 2
+
+  [42;1;37m PASS [0m test_05
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_06 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_06"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x783396800000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x783116800000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x773116800000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x771116800000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_06.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 130960372793344) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+KLEE: ERROR: klee_src/runtime/POSIX/file_api.c:199: ASSERTION FAIL: expr
+KLEE: NOTE: now ignoring this error at this location
+
+KLEE: done: total instructions = 16102
+KLEE: done: completed paths = 1
+KLEE: done: partially completed paths = 1
+KLEE: done: generated tests = 2
+
+  [42;1;37m PASS [0m test_06
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_07 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_07"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x76b5b4e00000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x76b334e00000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x75b334e00000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x759334e00000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_07.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 129320204894208) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+
+KLEE: done: total instructions = 14595
+KLEE: done: completed paths = 1
+KLEE: done: partially completed paths = 0
+KLEE: done: generated tests = 1
+
+  [42;1;37m PASS [0m test_07
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_08 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_08"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x768be2a00000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x768962a00000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x758962a00000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x756962a00000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_08.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 129140583825408) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+KLEE: ERROR: klee_src/runtime/POSIX/file_api.c:199: ASSERTION FAIL: expr
+KLEE: NOTE: now ignoring this error at this location
+
+KLEE: done: total instructions = 17139
+KLEE: done: completed paths = 1
+KLEE: done: partially completed paths = 1
+KLEE: done: generated tests = 2
+
+  [42;1;37m PASS [0m test_08
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_09 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_09"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x70ca7ee00000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x70c7fee00000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x6fc7fee00000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x6fa7fee00000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_09.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 122812423471104) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+KLEE: ERROR: klee_src/runtime/POSIX/file_api.c:199: ASSERTION FAIL: expr
+KLEE: NOTE: now ignoring this error at this location
+
+KLEE: done: total instructions = 18087
+KLEE: done: completed paths = 1
+KLEE: done: partially completed paths = 1
+KLEE: done: generated tests = 2
+
+  [42;1;37m PASS [0m test_09
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_10 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_10"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x78aa21400000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x78a7a1400000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x77a7a1400000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x7787a1400000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_10.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 131469506772992) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+KLEE: ERROR: klee_src/runtime/POSIX/file_api.c:199: ASSERTION FAIL: expr
+KLEE: NOTE: now ignoring this error at this location
+KLEE: WARNING ONCE: calling external: printf(132666259144704, 10) at test_10.c:24 12
+KLEE: WARNING: write: write() ignores bytes.
+
+[info] original file size = 10
+
+KLEE: done: total instructions = 16399
+KLEE: done: completed paths = 1
+KLEE: done: partially completed paths = 1
+KLEE: done: generated tests = 2
+
+  [42;1;37m PASS [0m test_10
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_11 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_11"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x7bc49de00000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x7bc21de00000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x7ac21de00000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x7aa21de00000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_11.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 134881801666560) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+KLEE: ERROR: klee_src/runtime/POSIX/file_api.c:199: ASSERTION FAIL: expr
+KLEE: NOTE: now ignoring this error at this location
+
+KLEE: done: total instructions = 16592
+KLEE: done: completed paths = 1
+KLEE: done: partially completed paths = 1
+KLEE: done: generated tests = 2
+
+  [42;1;37m PASS [0m test_11
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_12 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_12"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x77f670800000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x77f3f0800000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x76f3f0800000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x76d3f0800000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_12.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 130697742254080) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+KLEE: ERROR: klee_src/runtime/POSIX/file_api.c:199: ASSERTION FAIL: expr
+KLEE: NOTE: now ignoring this error at this location
+
+KLEE: done: total instructions = 30253
+KLEE: done: completed paths = 1
+KLEE: done: partially completed paths = 1
+KLEE: done: generated tests = 2
+
+  [42;1;37m PASS [0m test_12
+
+[1;33m───────────────────────────────────────────────────────────[0m
+[1;37m  ▶ test_13 [2m(--sym-files 1 10)[0m
+[1;33m───────────────────────────────────────────────────────────[0m
+KLEE: NOTE: Using POSIX model: /tmp/klee_build130stp_z3/runtime/lib/libkleeRuntimePOSIX64_Debug+Asserts.bca
+KLEE: NOTE: Using klee-uclibc : /tmp/klee_build130stp_z3/runtime/lib/klee-uclibc.bca
+KLEE: output directory is "/home/klee/klee-tests/individual-tests/write/klee-out-test_13"
+KLEE: Using STP solver backend
+KLEE: SAT solver: MiniSat
+KLEE: Deterministic allocator: Using quarantine queue size 8
+KLEE: Deterministic allocator: globals (start-address=0x76a014e00000 size=10 GiB)
+KLEE: Deterministic allocator: constants (start-address=0x769d94e00000 size=10 GiB)
+KLEE: Deterministic allocator: heap (start-address=0x759d94e00000 size=1024 GiB)
+KLEE: Deterministic allocator: stack (start-address=0x757d94e00000 size=128 GiB)
+warning: Linking two modules of different target triples: 'fd64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_3264_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_init_env64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'test_13.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_init64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'stubs64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_range64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'file_api64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'fd_6464_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'illegal64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_div_zero_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+warning: Linking two modules of different target triples: 'klee_overshift_check64_Debug+Asserts.bc' is 'x86_64-unknown-linux-gnu' whereas '__uClibc_main.os' is 'x86_64-pc-linux-gnu'
+
+KLEE: WARNING: undefined reference to function: klee_assert_fail
+KLEE: WARNING: undefined reference to function: klee_is_certain
+KLEE: WARNING: undefined reference to function: klee_is_sat
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 129227326226432) at klee_src/runtime/POSIX/fd.c:1009 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+KLEE: ERROR: klee_src/runtime/POSIX/file_api.c:199: ASSERTION FAIL: expr
+KLEE: NOTE: now ignoring this error at this location
+
+KLEE: done: total instructions = 16651
+KLEE: done: completed paths = 0
+KLEE: done: partially completed paths = 2
+KLEE: done: generated tests = 1
+
+  [41;1;37m FAIL [0m test_13 (0 completed paths - no input satisfies the asserts/assumes)
+
+[1;36m═══════════════════════════════════════════════════════════[0m
+[1;37m  RESULTS[0m
+[1;36m═══════════════════════════════════════════════════════════[0m
+
+  [1;37mTotal:  13[0m
+  [1;32mPassed: 12[0m
+  [1;31mFailed: 1[0m
+
+  [41;1;37m 1 TEST(S) FAILED [0m
+
+  [1;31mFailed tests: test_13[0m
+
+[1;36m═══════════════════════════════════════════════════════════[0m

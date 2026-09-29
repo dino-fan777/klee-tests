@@ -1,0 +1,79 @@
+● Here's the final version — fully branchless by construction (only comparisons and bitwise ops, nothing that can lower to a branch regardless of optimization level), handles any N automatically, zero syscalls, and includes deletion-awareness.
+
+  cnstr_t file_exists(const char *fname) {
+      long m = 0;
+      for (unsigned i = 0; i < __exe_fs.n_sym_files; i++) {
+          long name_match  = _EQ_(fname[0], (long)('A' + i));
+          long not_deleted = _NEQ_(__exe_fs.sym_files[i].stat->st_ino, 0);
+          m |= (name_match & not_deleted);
+      }
+      return m;
+  }
+
+  cnstr_t file_not_exists(const char *fname) {
+      long in_domain = _GE_(fname[0], 'A') & _LE_(fname[0], 'Z');
+      long exists     = file_exists(fname);
+      return in_domain & (exists ^ 1);   /* flips 0<->1, no !/&&/||/?: anywhere */
+  }
+
+  Why every piece is safe:
+
+  - The for loop: i < __exe_fs.n_sym_files compares two concrete integers (a local counter and a value fixed once at startup from --sym-files) — never symbolic, so this branch never forks. It just unrolls N times.
+  - _EQ_/_NEQ_/_GE_/_LE_: plain comparison operators (==, !=, >=, <=). These always lower to icmp + a conversion — a value computation, never a branch, at any optimization level. No ambiguity here.
+  - &, |, ^: bitwise operators, not &&/||/?:/!. There's no short-circuit semantics to lower into control flow — nothing for the compiler to turn into a br even at -O0, because these operators don't have "skip evaluating the other side" semantics in the first place.
+  - Deletion check: not_deleted reads __exe_fs.sym_files[i].stat->st_ino, which __file_delete() zeroes via memset(f->dfile, 0, sizeof *f->dfile). Folding it into the same & before OR-accumulating means a deleted file correctly drops out of "exists" without adding any new control
+  flow.
+  - General N: the loop bound and the per-iteration letter ('A' + i) both come straight from __exe_fs.n_sym_files, which is the real config set by whatever --sym-files N K that specific run actually used — not a guess, not something you pass manually, and correct for N=1 through
+  N=26 without any change to the function.
+  - No syscalls: everything reads fields of __exe_fs, which file_api.c already has access to via the extern exe_file_system_t __exe_fs; in fd.h it already includes. No stat(), no new includes, no changes to fd.c/fd.h at all.
+
+  This is a drop-in replacement for the current file_exists/file_not_exists in your fork's file_api.c — same 2-argument signatures, so nothing in the already-converted open/*.c tests needs to change. Let me know once you've applied it (plus the earlier close() fix) and re-run —
+  I'll cross-reference the new log against this implementation specifically.
+
+✻ Sautéed for 1m 38s
+
+※ recap: Porting the KLEE open() test suite to your new split API; all 51 tests are converted and two runtime bugs in your fork (close() naming, file_exists/file_not_exists) have proposed fixes. Next: you apply those fixes and re-run, then I'll check the new log.
+
+❯ Great ideia, explain line by line.
+
+● file_exists
+
+  cnstr_t file_exists(const char *fname) {
+  cnstr_t is typedef long — the return value is a symbolic boolean encoded as a long (0 or 1), same convention as every other predicate in the API (_EQ_, _GE_, etc.). fname is the caller's symbolic 2-byte buffer (fname[0] = the letter, fname[1] = '\0').
+
+      long m = 0;
+  The accumulator — starts at "doesn't exist" (0). It will get OR'd with a 1 the moment we find a registered, non-deleted file whose name matches fname[0]. This is the running result of the whole ite(A,1,ite(B,1,...0)) chain, computed as one value instead of nested branches.
+
+      for (unsigned i = 0; i < __exe_fs.n_sym_files; i++) {
+  Iterates once per registered sym-file. __exe_fs.n_sym_files is the real count set by klee_init_fds() at startup, straight from whatever --sym-files N K that run used — not a hardcoded or passed-in number, so this automatically covers N=1 through N=26 without the function
+  needing to know N ahead of time. Both i and n_sym_files are concrete integers (never made symbolic), so this loop condition is a normal, non-forking branch — KLEE just unrolls it N times like any ordinary C loop.
+
+          long name_match  = _EQ_(fname[0], (long)('A' + i));
+  'A' + i is the actual name of file i, per klee_init_fds's own rule (name[0] = 'A' + k) — not an assumption we're making, it's KLEE's own naming convention read back correctly for each index. _EQ_(a,b) is a == b, a pure comparison — fname[0] is symbolic, so this doesn't evaluate
+  to a concrete true/false; it produces a new symbolic expression (an equality constraint as a value) without branching, because == alone never requires control flow — there's nothing to skip evaluating, unlike &&/||.
+
+          long not_deleted = _NEQ_(__exe_fs.sym_files[i].stat->st_ino, 0);
+  __exe_fs.sym_files[i] is that file's exe_disk_file_t entry — safe to index since i < n_sym_files is the loop's own bound. .stat->st_ino is one of the fields __file_delete() zeroes out via memset(f->dfile, 0, sizeof *f->dfile). So this reads as 1 (not deleted) normally, or 0
+  (deleted) after a delete. Again just a comparison — no branch.
+
+          m |= (name_match & not_deleted);
+  & (bitwise AND) combines "name matches file i" with "file i is still alive" — both are guaranteed 0-or-1 values from comparisons, so & here behaves exactly like logical AND would, just without any of &&'s short-circuit/control-flow baggage. |= (bitwise OR-assign) folds that
+  into the running accumulator — again a plain arithmetic op, not ||. After all N iterations, m is 1 if any registered, non-deleted file matched, 0 otherwise. This is the ITE-chain, fully unrolled and computed as pure arithmetic.
+
+      return m;
+  }
+  Hands back the accumulated symbolic boolean — a single expression built from N comparisons and N-1 ORs, no forks introduced anywhere in this function.
+
+  file_not_exists
+
+  cnstr_t file_not_exists(const char *fname) {
+      long in_domain = _GE_(fname[0], 'A') & _LE_(fname[0], 'Z');
+  This is the safety bound from the fd_32.c bug: restricts the answer to "a valid uppercase letter" — the domain KLEE's file-creation code can actually index into without going out of bounds. _GE_/_LE_ are comparisons (safe), combined with & instead of _AND_'s && to stay
+  unambiguously branch-free.
+
+      long exists     = file_exists(fname);
+  Reuses the function above — same N-file-aware, branchless check.
+
+      return in_domain & (exists ^ 1);
+  exists ^ 1 flips a guaranteed-0-or-1 value: 0 becomes 1, 1 becomes 0 — a branch-free NOT, avoiding even _NOT_'s ! (which is almost certainly safe too, but XOR removes any doubt). The final & says: "a valid letter, AND not one of the registered/alive files" — which is exactly
+  "doesn't exist," bounded to the domain that won't crash open(..., O_CREAT, ...).
