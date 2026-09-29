@@ -28,6 +28,13 @@ RUN apt-get update -qq || true \
 USER klee
 WORKDIR /home/klee
 
+# Invalidate the cache when either ref moves. Without this, Docker reuses the
+# fetch layer below because its text never changes, so rebuilding after a push
+# silently produces an image built from the OLD commits. These two files record
+# the current head of each ref, and change whenever it does.
+ADD https://api.github.com/repos/dino-fan777/klee/commits/${FORK_REF} /tmp/.fork_ref.json
+ADD https://api.github.com/repos/dino-fan777/klee-tests/commits/${TESTS_REF} /tmp/.tests_ref.json
+
 # Fetched rather than cloned, because "git clone --branch" only accepts a
 # branch or tag, so it cannot pin a commit. Fetching the ref directly works
 # for branches, tags and full 40-character commit hashes alike. Abbreviated
