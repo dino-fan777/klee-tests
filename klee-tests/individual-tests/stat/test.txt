@@ -1,1 +1,0 @@
-This file was made to test the stat syscall.
