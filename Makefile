@@ -42,13 +42,26 @@ run_all:
 	@echo ""
 	@echo "$(BG_CYAN) KLEE FULL TEST SUITE $(RESET)"
 	@echo ""
-	@for suite in $(SUITES); do \
+	@tp=0; tf=0; \
+	for suite in $(SUITES); do \
 		echo "$(CYAN)═══════════════════════════════════════════════════════════$(RESET)"; \
 		echo "$(WHITE)  Suite: $$suite$(RESET)"; \
 		echo "$(CYAN)═══════════════════════════════════════════════════════════$(RESET)"; \
-		$(MAKE) -C individual-tests/$$suite run; \
+		$(MAKE) -C individual-tests/$$suite run 2>&1 | tee /tmp/.suite_$$suite.log; \
+		p=`grep -oE 'Passed: [0-9]+' /tmp/.suite_$$suite.log | tail -1 | grep -oE '[0-9]+'`; \
+		f=`grep -oE 'Failed: [0-9]+' /tmp/.suite_$$suite.log | tail -1 | grep -oE '[0-9]+'`; \
+		tp=`expr $$tp + $${p:-0}`; tf=`expr $$tf + $${f:-0}`; \
+		rm -f /tmp/.suite_$$suite.log; \
 		echo ""; \
-	done
+	done; \
+	echo "$(CYAN)═══════════════════════════════════════════════════════════$(RESET)"; \
+	echo "$(WHITE)  OVERALL$(RESET)"; \
+	echo "$(CYAN)═══════════════════════════════════════════════════════════$(RESET)"; \
+	echo ""; \
+	echo "  $(WHITE)Total:  `expr $$tp + $$tf`$(RESET)"; \
+	echo "  $(GREEN)Passed: $$tp$(RESET)"; \
+	echo "  $(RED)Failed: $$tf$(RESET)"; \
+	echo ""
 
 compile_all:
 	@for suite in $(SUITES); do \

@@ -1,0 +1,119 @@
+===============================================================================
+  RUNNING THE TEST SUITE
+===============================================================================
+
+You are in /home/klee/klee-tests. KLEE is already built with the file-system
+API, so there is nothing to compile first.
+
+A test does NOT need --sym-files. Each test creates the file it works on by
+calling __file_create() itself, which is what makes the suite independent of
+any one engine's command line.
+
+
+-------------------------------------------------------------------------------
+ RUN EVERYTHING
+-------------------------------------------------------------------------------
+
+  make run_all
+
+Expected on the current fork: 102 passed, 25 failed, out of 127.
+The 25 failures are real defects in KLEE's POSIX summaries, not broken
+tests. See issues/klee_posix_findings.xlsx.
+
+
+-------------------------------------------------------------------------------
+ RUN ONE SYSTEM CALL
+-------------------------------------------------------------------------------
+
+  make run_open           all 51 open tests
+  make run_close          all 10 close tests
+  make run_read           all 12 read tests
+  make run_write          all 13 write tests
+  make run_lseek          all 15 lseek tests
+  make run_chmod          all 13 chmod tests
+  make run_dup            all 13 dup/dup2 tests
+
+
+-------------------------------------------------------------------------------
+ RUN A SINGLE TEST
+-------------------------------------------------------------------------------
+
+  make run_open_12        open/test_12.c only
+  make run_lseek_15       lseek/test_15.c only
+  make run_chmod_10       chmod/test_10.c only
+
+Or from inside a suite directory:
+
+  cd individual-tests/open
+  make run_12
+
+
+-------------------------------------------------------------------------------
+ HOW PASS AND FAIL ARE DECIDED
+-------------------------------------------------------------------------------
+
+A test FAILS when KLEE reports:
+
+  KLEE: done: completed paths = 0
+
+meaning no input satisfying the test's __assume() constraints also satisfies
+its __gen_assert() assertions, so the behaviour the test describes is not
+reachable at all. Anything else is a PASS.
+
+Note this is deliberately not "did any path hit an assertion". With a
+symbolic file, KLEE legitimately explores permission configurations in which
+the operation under test is supposed to be refused, so an assertion failing
+on some path is expected and is not by itself a defect.
+
+
+-------------------------------------------------------------------------------
+ LOOKING AT A FAILURE
+-------------------------------------------------------------------------------
+
+Each run leaves a directory and a log next to the test:
+
+  individual-tests/open/klee-out-test_12/     KLEE's output
+  individual-tests/open/klee-out-test_12.log  everything KLEE printed
+
+Useful things inside the output directory:
+
+  info                 the command line, and the path/query counts
+  *.assert.err         the assertion that failed, with a stack trace
+  *.ktest              one generated input per explored path
+
+  cat individual-tests/open/klee-out-test_12/*.assert.err
+  grep "completed paths" individual-tests/open/klee-out-test_12/info
+
+
+-------------------------------------------------------------------------------
+ CLEANING
+-------------------------------------------------------------------------------
+
+  make clean              remove all .bc files, klee-out-* directories and logs
+
+
+-------------------------------------------------------------------------------
+ CHANGING THE ENGINE
+-------------------------------------------------------------------------------
+
+The fork is at /home/klee/klee_fork. After editing it:
+
+  ~/rebuild_posix.sh      runtime/POSIX only. Seconds.
+                          Use for fd.c, fd.h, fd_init.c, file_api.c,
+                          include/klee/file_api.h
+
+  ~/rebuild_all.sh        runtime and core C++. Minutes.
+                          Needed for SpecialFunctionHandler.cpp/.h and
+                          include/klee/klee.h, because klee_is_sat and
+                          klee_is_certain are compiled into the binary
+                          rather than into the runtime bitcode.
+
+One knob worth knowing: the size of a created symbolic file is
+
+  SYM_FILE_DEFAULT_SIZE in klee_fork/runtime/POSIX/file_api.c   (10 bytes)
+
+Changing it breaks tests that assert values derived from it, among them
+lseek test_07 (SEEK_END == 10), lseek test_08 (-3 from the end == 7) and
+read test_09 (a read near end-of-file).
+
+===============================================================================
