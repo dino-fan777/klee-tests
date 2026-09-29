@@ -28,8 +28,18 @@ RUN apt-get update -qq || true \
 USER klee
 WORKDIR /home/klee
 
-RUN git clone --branch "${FORK_REF}" --depth 1 "${FORK_REPO}" klee_fork \
- && git clone --branch "${TESTS_REF}" --depth 1 "${TESTS_REPO}" klee-tests
+# Fetched rather than cloned, because "git clone --branch" only accepts a
+# branch or tag, so it cannot pin a commit. Fetching the ref directly works
+# for branches, tags and full 40-character commit hashes alike. Abbreviated
+# hashes are not accepted by the protocol, so FORK_REF and TESTS_REF must be
+# given in full when pinning a commit.
+RUN mkdir klee_fork klee-tests \
+ && cd /home/klee/klee_fork \
+ && git init -q && git remote add origin "${FORK_REPO}" \
+ && git fetch -q --depth 1 origin "${FORK_REF}" && git checkout -q FETCH_HEAD \
+ && cd /home/klee/klee-tests \
+ && git init -q && git remote add origin "${TESTS_REPO}" \
+ && git fetch -q --depth 1 origin "${TESTS_REF}" && git checkout -q FETCH_HEAD
 
 COPY --chown=klee:klee docker/rebuild_posix.sh docker/rebuild_all.sh /home/klee/
 COPY --chown=klee:klee workflow.txt /home/klee/workflow.txt

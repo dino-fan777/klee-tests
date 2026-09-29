@@ -2,8 +2,7 @@
 
 127 tests covering eight POSIX system calls, written against a
 tool-independent file-system API rather than against any one engine's
-internals. Running them against KLEE's POSIX summaries found six defects,
-four of which have since been fixed upstream.
+internals.
 
 | System call | Tests | |
 |---|---|---|
@@ -16,9 +15,8 @@ four of which have since been fixed upstream.
 | `dup` / `dup2` | 13 | |
 | **Total** | **127** | 102 pass, 25 fail |
 
-The 25 failures are **defects in the engine, not broken tests**. See
-`issues/klee_posix_findings.xlsx`, and the per-system-call spreadsheet in
-each `individual-tests/` folder for what every test does.
+Defects found are in `issues/klee_posix_findings.xlsx`. For what each test
+does, see the spreadsheet in its `individual-tests/` folder.
 
 ## Requires the KLEE fork
 
@@ -29,11 +27,6 @@ not provide: `__file_create`, `file_exists`, `__assume`, `__gen_assert`,
 `__file_offset`, `__is_sat`, `__is_certain` and others. They live in a fork:
 
 * **[github.com/dino-fan777/klee](https://github.com/dino-fan777/klee)**, branch **`api_klee`**
-
-`__file_create` is what makes the suite tool-independent. Each test creates
-the file it operates on, so KLEE's `--sym-files` command-line option is not
-used anywhere. On stock KLEE the tests do not merely fail, they do not
-compile.
 
 ## Quickest way to run them
 
@@ -59,11 +52,29 @@ make run_open_12        # one test
 fail are decided, how to read a failure, and how to rebuild the engine after
 editing the fork.
 
-To pin exact revisions rather than branch tips:
+### Pinning exact revisions
+
+By default the image is built from the tip of the fork's `api_klee` branch
+and of this repository's `main`. That means two builds run on different days
+can produce different images, because either branch may have moved in
+between.
+
+To get a build that can be reproduced exactly, name the commits instead:
 
 ```bash
-docker build --build-arg FORK_REF=<commit> --build-arg TESTS_REF=<commit> -t klee-fsapi .
+docker build \
+  --build-arg FORK_REF=40b3b74109094e5930ee06eb9f948f02dbfc8e01 \
+  --build-arg TESTS_REF=4788115fa49ed56ea52ac5979e4a0eaa86184d6b \
+  -t klee-fsapi .
 ```
+
+`FORK_REF` selects the revision of the fork, `TESTS_REF` the revision of this
+repository. Both accept a branch, a tag, or a commit hash, but a commit hash
+**must be given in full**: git cannot fetch an abbreviated one over the
+network.
+
+Worth doing when reporting results, so the numbers can be tied to the exact
+engine and tests that produced them.
 
 ## Running without Docker
 
