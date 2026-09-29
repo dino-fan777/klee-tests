@@ -16,7 +16,7 @@ internals.
 | **Total** | **127** | 102 pass, 25 fail |
 
 Defects found are in `issues/klee_posix_findings.xlsx`. For what each test
-does, see the spreadsheet in its `individual-tests/` folder.
+does, see the spreadsheet in its `individual-tests/` folder. For example, the `open` folder has the `open_results` which explain each test.
 
 ## Requires the KLEE fork
 
