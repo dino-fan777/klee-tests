@@ -4,8 +4,8 @@
  * Second open() on same sym-file fails because first open overwrites st_mode
  * creating a mixed symbolic/concrete expression the solver can't handle.
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_32.c
- * Run    : klee --posix-runtime --libc=uclibc test_32.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_32.c
+ * Run    : klee --posix-runtime --libc=uclibc test_32.bc
  */
 #include "test_helper.h"
 

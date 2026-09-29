@@ -1,8 +1,8 @@
 /*
  * test_50.c - Close fd=3, reopen gets fd=3 (recycling)
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_50.c
- * Run    : klee --posix-runtime --libc=uclibc test_50.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_50.c
+ * Run    : klee --posix-runtime --libc=uclibc test_50.bc
  */
 #include "test_helper.h"
 

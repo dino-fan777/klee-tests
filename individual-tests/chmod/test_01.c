@@ -2,7 +2,7 @@
  * test_01.c - chmod on existing sym-file succeeds
  *
  * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_01.c
- * Run    : klee --posix-runtime --libc=uclibc test_01.bc --sym-files 1 10
+ * Run    : klee --posix-runtime --libc=uclibc test_01.bc
  */
 #include "test_helper.h"
 

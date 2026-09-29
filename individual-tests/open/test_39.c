@@ -1,8 +1,8 @@
 /*
  * test_39.c - O_RDWR sets both, read and write succeed
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_39.c
- * Run    : klee --posix-runtime --libc=uclibc test_39.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_39.c
+ * Run    : klee --posix-runtime --libc=uclibc test_39.bc
  */
 #include "test_helper.h"
 

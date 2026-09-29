@@ -4,8 +4,8 @@
  * Opens O_RDWR (no O_TRUNC), overwrites first 6 bytes with 'abcdef',
  * then seeks and reads 1 byte at a time to verify bytes at positions 0, 2, 5.
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_13.c
- * Run    : klee --posix-runtime --libc=uclibc test_13.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_13.c
+ * Run    : klee --posix-runtime --libc=uclibc test_13.bc
  */
 #include "test_helper.h"
 

@@ -1,8 +1,8 @@
 /*
  * test_21.c - O_CLOEXEC | O_RDONLY on existing file succeeds
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone test_21.c
- * Run    : klee --posix-runtime --libc=uclibc test_21.bc --sym-files 1 1
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_21.c
+ * Run    : klee --posix-runtime --libc=uclibc test_21.bc
  */
 #include "test_helper.h"
 

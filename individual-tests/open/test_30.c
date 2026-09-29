@@ -1,8 +1,8 @@
 /*
  * test_30.c - Open O_RDWR, close, reopen O_RDONLY
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_30.c
- * Run    : klee --posix-runtime --libc=uclibc test_30.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_30.c
+ * Run    : klee --posix-runtime --libc=uclibc test_30.bc
  */
 #include "test_helper.h"
 

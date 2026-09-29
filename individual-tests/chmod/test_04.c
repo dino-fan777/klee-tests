@@ -5,7 +5,7 @@
  * after chmod(0777) the owner must be able to open O_RDWR.
  *
  * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_04.c
- * Run    : klee --posix-runtime --libc=uclibc test_04.bc --sym-files 1 10
+ * Run    : klee --posix-runtime --libc=uclibc test_04.bc
  */
 #include "test_helper.h"
 

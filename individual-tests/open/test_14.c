@@ -1,8 +1,8 @@
 /*
  * test_14.c - Second fd is fd=4 (via dup)
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone test_14.c
- * Run    : klee --posix-runtime --libc=uclibc test_14.bc --sym-files 1 1
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_14.c
+ * Run    : klee --posix-runtime --libc=uclibc test_14.bc
  */
 #include "test_helper.h"
 

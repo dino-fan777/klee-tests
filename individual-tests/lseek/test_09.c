@@ -3,8 +3,8 @@
  *
  * 10-byte file, lseek(100, SEEK_SET) should return 100.
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_09.c
- * Run    : klee --posix-runtime --libc=uclibc test_09.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_09.c
+ * Run    : klee --posix-runtime --libc=uclibc test_09.bc
  */
 #include "test_helper.h"
 

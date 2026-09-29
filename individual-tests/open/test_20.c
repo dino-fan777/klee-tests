@@ -1,8 +1,8 @@
 /*
  * test_20.c - O_NONBLOCK | O_RDONLY on existing file succeeds
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone test_20.c
- * Run    : klee --posix-runtime --libc=uclibc test_20.bc --sym-files 1 1
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_20.c
+ * Run    : klee --posix-runtime --libc=uclibc test_20.bc
  */
 #include "test_helper.h"
 

@@ -1,8 +1,8 @@
 /*
  * test_37.c - O_RDONLY sets eReadable, read succeeds
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_37.c
- * Run    : klee --posix-runtime --libc=uclibc test_37.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_37.c
+ * Run    : klee --posix-runtime --libc=uclibc test_37.bc
  */
 #include "test_helper.h"
 

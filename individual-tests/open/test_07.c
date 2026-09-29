@@ -1,8 +1,8 @@
 /*
  * test_07.c - O_CREAT | O_WRONLY creates new file
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone test_07.c
- * Run    : klee --posix-runtime --libc=uclibc test_07.bc --sym-files 1 1
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_07.c
+ * Run    : klee --posix-runtime --libc=uclibc test_07.bc
  */
 #include "test_helper.h"
 

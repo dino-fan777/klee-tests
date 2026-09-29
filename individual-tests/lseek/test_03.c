@@ -1,8 +1,8 @@
 /*
  * test_03.c - SEEK_SET to end of 10-byte file
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_03.c
- * Run    : klee --posix-runtime --libc=uclibc test_03.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_03.c
+ * Run    : klee --posix-runtime --libc=uclibc test_03.bc
  */
 #include "test_helper.h"
 

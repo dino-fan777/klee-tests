@@ -1,8 +1,8 @@
 /*
  * test_02.c - read 5 bytes from O_RDWR file
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_02.c
- * Run    : klee --posix-runtime --libc=uclibc test_02.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_02.c
+ * Run    : klee --posix-runtime --libc=uclibc test_02.bc
  */
 #include "test_helper.h"
 

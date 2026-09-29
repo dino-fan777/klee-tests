@@ -1,8 +1,8 @@
 /*
  * test_04.c - write 0 bytes succeeds with ret=0
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_04.c
- * Run    : klee --posix-runtime --libc=uclibc test_04.bc --sym-files 1 1
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_04.c
+ * Run    : klee --posix-runtime --libc=uclibc test_04.bc
  */
 #include "test_helper.h"
 

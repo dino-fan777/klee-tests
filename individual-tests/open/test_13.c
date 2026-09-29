@@ -1,8 +1,8 @@
 /*
  * test_13.c - First open() returns fd=3
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone test_13.c
- * Run    : klee --posix-runtime --libc=uclibc test_13.bc --sym-files 1 1
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_13.c
+ * Run    : klee --posix-runtime --libc=uclibc test_13.bc
  */
 #include "test_helper.h"
 

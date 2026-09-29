@@ -5,7 +5,7 @@
  * after chmod(0644) the owner must be able to open both O_RDONLY and O_WRONLY.
  *
  * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_03.c
- * Run    : klee --posix-runtime --libc=uclibc test_03.bc --sym-files 1 10
+ * Run    : klee --posix-runtime --libc=uclibc test_03.bc
  */
 #include "test_helper.h"
 

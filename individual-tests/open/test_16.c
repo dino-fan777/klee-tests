@@ -1,8 +1,8 @@
 /*
  * test_16.c - O_CREAT | O_EXCL | O_WRONLY on non-existing file succeeds
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone test_16.c
- * Run    : klee --posix-runtime --libc=uclibc test_16.bc --sym-files 1 1
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_16.c
+ * Run    : klee --posix-runtime --libc=uclibc test_16.bc
  */
 #include "test_helper.h"
 

@@ -4,8 +4,8 @@
  * Opens two fds. dup2 overwrites second with first. Second fd now
  * points to first's file. Verifies by reading through new fd2.
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_09.c
- * Run    : klee --posix-runtime --libc=uclibc test_09.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_09.c
+ * Run    : klee --posix-runtime --libc=uclibc test_09.bc
  */
 #include "test_helper.h"
 

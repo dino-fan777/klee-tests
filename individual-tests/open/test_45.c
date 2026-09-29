@@ -3,8 +3,8 @@
  *
  * chmod sets 0777, open with mode=0644 clobbers it. stat shows 0644 not 0777.
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_45.c
- * Run    : klee --posix-runtime --libc=uclibc test_45.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_45.c
+ * Run    : klee --posix-runtime --libc=uclibc test_45.bc
  */
 #include "test_helper.h"
 

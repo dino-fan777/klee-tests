@@ -1,8 +1,8 @@
 /*
  * test_08.c - O_CREAT | O_RDWR creates new file
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone test_08.c
- * Run    : klee --posix-runtime --libc=uclibc test_08.bc --sym-files 1 1
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_08.c
+ * Run    : klee --posix-runtime --libc=uclibc test_08.bc
  */
 #include "test_helper.h"
 

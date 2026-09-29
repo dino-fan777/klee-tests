@@ -4,8 +4,8 @@
  * Should fail with EACCES (no read bits). But has_permission never checks
  * read permission for O_RDONLY because flags & O_RDONLY is always 0.
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_44.c
- * Run    : klee --posix-runtime --libc=uclibc test_44.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_44.c
+ * Run    : klee --posix-runtime --libc=uclibc test_44.bc
  */
 #include "test_helper.h"
 

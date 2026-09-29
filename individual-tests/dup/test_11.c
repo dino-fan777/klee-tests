@@ -8,8 +8,8 @@
  * Code comment: "XXX Incorrect, really we need another data structure
  * for open files"
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_11.c
- * Run    : klee --posix-runtime --libc=uclibc test_11.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_11.c
+ * Run    : klee --posix-runtime --libc=uclibc test_11.bc
  */
 #include "test_helper.h"
 

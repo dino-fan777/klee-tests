@@ -1,8 +1,8 @@
 /*
  * test_18.c - O_TRUNC | O_RDWR on existing file succeeds
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone test_18.c
- * Run    : klee --posix-runtime --libc=uclibc test_18.bc --sym-files 1 1
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_18.c
+ * Run    : klee --posix-runtime --libc=uclibc test_18.bc
  */
 #include "test_helper.h"
 

@@ -1,8 +1,8 @@
 /*
  * test_49.c - Open with symbolic fname constrained to non-existing
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_49.c
- * Run    : klee --posix-runtime --libc=uclibc test_49.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_49.c
+ * Run    : klee --posix-runtime --libc=uclibc test_49.bc
  */
 #include "test_helper.h"
 

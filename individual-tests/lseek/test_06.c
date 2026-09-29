@@ -3,8 +3,8 @@
  *
  * Seeks to 7, then lseek(0, SEEK_CUR) should return 7.
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_06.c
- * Run    : klee --posix-runtime --libc=uclibc test_06.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_06.c
+ * Run    : klee --posix-runtime --libc=uclibc test_06.bc
  */
 #include "test_helper.h"
 

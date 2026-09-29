@@ -3,8 +3,8 @@
  *
  * fd1=3, fd2=4 (via dup). Close fd1. Reopen should get fd=3 (the gap).
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_51.c
- * Run    : klee --posix-runtime --libc=uclibc test_51.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_51.c
+ * Run    : klee --posix-runtime --libc=uclibc test_51.bc
  */
 #include "test_helper.h"
 

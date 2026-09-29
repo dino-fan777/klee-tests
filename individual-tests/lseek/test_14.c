@@ -2,8 +2,8 @@
  * test_14.c - O_TRUNC: SEEK_SET after write, read back and verify
  *
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_14.c
- * Run    : klee --posix-runtime --libc=uclibc test_14.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_14.c
+ * Run    : klee --posix-runtime --libc=uclibc test_14.bc
  */
 #include "test_helper.h"
 

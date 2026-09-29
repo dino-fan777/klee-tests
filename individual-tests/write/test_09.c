@@ -1,8 +1,8 @@
 /*
  * test_09.c - write with O_WRONLY, close, reopen O_RDONLY, read back, compare
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_09.c
- * Run    : klee --posix-runtime --libc=uclibc test_09.bc --sym-files 1 1
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_09.c
+ * Run    : klee --posix-runtime --libc=uclibc test_09.bc
  */
 #include "test_helper.h"
 

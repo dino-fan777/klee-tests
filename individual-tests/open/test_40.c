@@ -1,8 +1,8 @@
 /*
  * test_40.c - Open starts at offset 0
  *
- * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I.. test_40.c
- * Run    : klee --posix-runtime --libc=uclibc test_40.bc --sym-files 1 10
+ * Compile: clang -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone -I../../include test_40.c
+ * Run    : klee --posix-runtime --libc=uclibc test_40.bc
  */
 #include "test_helper.h"
 
